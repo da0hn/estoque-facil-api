@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+  postgres:
+    image: 'postgres:10'
+    environment:
+      - POSTGRES_DB=estoque_facil_api_db
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_USER=estoque_facil_api_user
+    ports:
+      - '15432:5432'
+    volumes:
+      - estoque-facil-db-volume:/var/lib/postgresql/data
+networks:
+  estoque-facil-api-network:
+    driver: bridge
+    name: estoque-facil-api-network
+volumes:
+  estoque-facil-db-volume:
+    driver: local
+    external: true
