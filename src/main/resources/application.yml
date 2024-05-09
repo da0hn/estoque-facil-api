@@ -22,4 +22,7 @@ spring:
       enabled: ${DOCKER_COMPOSE_ENABLED:false}
       lifecycle-management: start_only
       file: compose.yaml
-
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true
