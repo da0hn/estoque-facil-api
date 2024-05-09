@@ -1,3 +1,25 @@
+server:
+  address: 0.0.0.0
+  port: 8080
 spring:
   application:
     name: estoque-facil-api
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${ESTOQUE_FACIL_DB_HOST:localhost}:${ESTOQUE_FACIL_DB_PORT:5432}/estoque_facil_api_db
+    username: ${ESTOQUE_FACIL_DB_USER:user}
+    password: ${ESTOQUE_FACIL_DB_PASSWORD:123456}
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://${ESTOQUE_FACIL_DB_HOST:localhost}:${ESTOQUE_FACIL_DB_PORT:5432}/estoque_facil_api_db
+    user: ${ESTOQUE_FACIL_DB_USER:user}
+    password: ${ESTOQUE_FACIL_DB_PASSWORD:123456}
+  docker:
+    compose:
+      enabled: ${DOCKER_COMPOSE_ENABLED:false}
+      lifecycle-management: start_only
+      file: compose.yaml
+
