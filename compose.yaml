@@ -1,7 +1,8 @@
 version: '3.9'
 services:
-  postgres:
+  estoque-facil-api-db:
     image: 'postgres:10'
+    container_name: estoque-facil-api-db
     environment:
       - POSTGRES_DB=estoque_facil_api_db
       - POSTGRES_PASSWORD=123456
