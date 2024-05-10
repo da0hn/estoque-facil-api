@@ -11,12 +11,12 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
-import java.util.Map;
 import java.util.function.Function;
 
 @Slf4j
@@ -57,8 +57,8 @@ public class JwtServiceImpl implements JwtService {
   }
 
   @Override
-  public String generateToken(final String username, final TokenType type) {
-    return this.createToken(Map.of(), username, type);
+  public String generateToken(final UserDetails userDetails, final TokenType type) {
+    return this.createToken(userDetails, type);
   }
 
   private <T> T extractClaim(final String token, final Function<? super Claims, T> claimsResolver) {
@@ -66,10 +66,13 @@ public class JwtServiceImpl implements JwtService {
     return claimsResolver.apply(claims);
   }
 
-  private String createToken(final Map<String, Object> claims, final String username, final TokenType type) {
+  private String createToken(final UserDetails userDetails, final TokenType type) {
+    final var authorities = userDetails.getAuthorities().stream()
+      .map(GrantedAuthority::getAuthority)
+      .toList();
     return Jwts.builder()
-      .setClaims(claims)
-      .setSubject(username)
+      .claim("authorities", authorities)
+      .setSubject(userDetails.getUsername())
       .setIssuedAt(new Date(System.currentTimeMillis()))
       .setIssuer("estoque-facil")
       .setExpiration(this.getExpiration(type))

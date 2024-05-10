@@ -21,11 +21,16 @@ import lombok.Setter;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Collection;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Builder
 @Getter
@@ -34,7 +39,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity(name = "User")
 @Table(name = "\"user\"")
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
 
   @Serial
   private static final long serialVersionUID = 4050401775381276820L;
@@ -96,6 +101,33 @@ public class User implements Serializable {
     if (thisEffectiveClass != oEffectiveClass) return false;
     final User user = (User) o;
     return this.id != null && Objects.equals(this.id, user.id);
+  }
+
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return Stream.of(this.role)
+      .map(it -> (GrantedAuthority) () -> "ROLE_" + it.name())
+      .collect(Collectors.toSet());
+  }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return true;
   }
 
 }

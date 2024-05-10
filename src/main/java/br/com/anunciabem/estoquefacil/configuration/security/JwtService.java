@@ -8,7 +8,7 @@ public interface JwtService {
 
   boolean validateToken(String token, UserDetails userDetails);
 
-  String generateToken(String username, TokenType type);
+  String generateToken(UserDetails username, TokenType type);
 
   enum TokenType {
     ACCESS,

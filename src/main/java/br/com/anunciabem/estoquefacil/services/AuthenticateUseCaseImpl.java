@@ -33,8 +33,8 @@ public class AuthenticateUseCaseImpl implements AuthenticateUseCase {
     this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(parameter.username(), parameter.password()));
 
     return LoginResponse.builder()
-      .token(this.jwtService.generateToken(user.getUsername(), JwtService.TokenType.ACCESS))
-      .refreshToken(this.jwtService.generateToken(user.getUsername(), JwtService.TokenType.REFRESH))
+      .token(this.jwtService.generateToken(user, JwtService.TokenType.ACCESS))
+      .refreshToken(this.jwtService.generateToken(user, JwtService.TokenType.REFRESH))
       .email(user.getEmail())
       .username(user.getUsername())
       .role(user.getRole())
