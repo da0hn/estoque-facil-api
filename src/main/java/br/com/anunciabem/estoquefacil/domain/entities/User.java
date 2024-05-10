@@ -9,6 +9,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,6 +45,7 @@ public class User implements Serializable {
   @Column(name = "id", nullable = false)
   private Long id;
 
+  @NotNull
   @CreatedDate
   @Column(name = "created_at", nullable = false, updatable = false)
   private Instant createdAt;
@@ -49,18 +54,27 @@ public class User implements Serializable {
   @Column(name = "updated_at")
   private Instant updatedAt;
 
+  @NotBlank
+  @Size(min = 6, max = 120)
   @Column(name = "name", length = 120, nullable = false)
   private String name;
 
+  @Email
+  @Size(max = 120)
   @Column(name = "email", length = 50, nullable = false, unique = true)
   private String email;
 
+  @NotBlank
+  @Size(max = 50)
   @Column(name = "username", length = 50, nullable = false, unique = true)
   private String username;
 
-  @Column(name = "password", length = 50, nullable = false)
+  @NotBlank
+  @Size(max = 120)
+  @Column(name = "password", length = 120, nullable = false)
   private String password;
 
+  @NotNull
   @Enumerated(EnumType.STRING)
   @Column(name = "role", nullable = false)
   private Role role;

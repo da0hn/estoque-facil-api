@@ -31,4 +31,12 @@ public class ApiDataResponse<T> {
       .build();
   }
 
+  public static ApiDataResponse<Void> failure(final String message) {
+    return ApiDataResponse.<Void>builder()
+      .data(null)
+      .timestamp(Instant.now())
+      .message(message)
+      .build();
+  }
+
 }
