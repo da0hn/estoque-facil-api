@@ -7,6 +7,9 @@ spring:
   threads:
     virtual:
       enabled: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://${ESTOQUE_FACIL_DB_HOST:localhost}:${ESTOQUE_FACIL_DB_PORT:15432}/estoque_facil_api_db

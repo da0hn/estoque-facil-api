@@ -9,25 +9,25 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.util.StringUtils;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.io.IOException;
 
+@Component
 @AllArgsConstructor
 public class AuthenticationTokenFilter extends OncePerRequestFilter {
+
+  private static final String BEARER = "Bearer ";
+
+  private static final String AUTHORIZATION_HEADER = "Authorization";
 
   private final UserDetailsService userDetailsService;
 
   private final JwtService jwtService;
 
-  private String parseJwt(final HttpServletRequest request) {
-    final var authenticationHeader = request.getHeader("Authorization");
-    if (!StringUtils.hasText(authenticationHeader) || !authenticationHeader.startsWith("Bearer ")) {
-      throw new IllegalArgumentException("Jwt token is missing or invalid");
-    }
-    return authenticationHeader.substring(7);
-  }
+  private final HandlerExceptionResolver handlerExceptionResolver;
 
   @Override
   protected void doFilterInternal(
@@ -36,7 +36,12 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
     final FilterChain filterChain
   ) throws ServletException, IOException {
     try {
-      final var jwt = this.parseJwt(request);
+      final var authenticationHeader = request.getHeader(AUTHORIZATION_HEADER);
+      if (authenticationHeader == null || !authenticationHeader.startsWith(BEARER)) {
+        filterChain.doFilter(request, response);
+        return;
+      }
+      final var jwt = authenticationHeader.substring(BEARER.length());
       final var username = this.jwtService.extractUsername(jwt);
       final var userDetails = this.userDetailsService.loadUserByUsername(username);
       if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -46,12 +51,13 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
           SecurityContextHolder.getContext().setAuthentication(authentication);
         }
       }
+      filterChain.doFilter(request, response);
     }
     catch (final Exception e) {
       this.logger.error("Cannot set user authentication: {}", e);
+      this.handlerExceptionResolver.resolveException(request, response, null, e);
     }
 
-    filterChain.doFilter(request, response);
   }
 
 }

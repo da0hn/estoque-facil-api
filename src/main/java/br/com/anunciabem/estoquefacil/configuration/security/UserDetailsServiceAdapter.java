@@ -1,6 +1,6 @@
 package br.com.anunciabem.estoquefacil.configuration.security;
 
-import br.com.anunciabem.estoquefacil.entities.User;
+import br.com.anunciabem.estoquefacil.domain.entities.User;
 import br.com.anunciabem.estoquefacil.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

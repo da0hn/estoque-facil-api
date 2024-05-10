@@ -1,4 +1,4 @@
-package br.com.anunciabem.estoquefacil.entities;
+package br.com.anunciabem.estoquefacil.domain.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,14 +7,13 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -30,17 +29,17 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "User")
-@Table(name = "user")
+@Table(name = "\"user\"")
 public class User implements Serializable {
 
   @Serial
   private static final long serialVersionUID = 4050401775381276820L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_users")
+  @SequenceGenerator(name = "seq_users", sequenceName = "seq_users", allocationSize = 1)
   @Column(name = "id", nullable = false)
   private Long id;
-
 
   @CreatedDate
   @Column(name = "created_at", nullable = false, updatable = false)

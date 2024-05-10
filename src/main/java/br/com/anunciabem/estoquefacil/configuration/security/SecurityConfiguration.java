@@ -8,27 +8,26 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.DefaultSecurityFilterChain;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableMethodSecurity(
-  securedEnabled = true,
-  jsr250Enabled = true
-)
+@EnableWebSecurity
 @AllArgsConstructor
+@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfiguration {
 
   private final UserDetailsService userDetailsService;
 
-  private final UnauthorizedHandler unauthorizedHandler;
+  private final AuthenticationTokenFilter authenticationTokenFilter;
 
-  private final JwtService jwtService;
+  private final UnauthorizedHandler unauthorizedHandler;
 
   @Bean
   public DaoAuthenticationProvider authenticationProvider() {
@@ -49,24 +48,20 @@ public class SecurityConfiguration {
   }
 
   @Bean
-  public DefaultSecurityFilterChain filterChain(final HttpSecurity httpSecurity) throws Exception {
-    return httpSecurity.csrf(AbstractHttpConfigurer::disable)
-      .exceptionHandling(it -> it.authenticationEntryPoint(this.unauthorizedHandler))
+  public SecurityFilterChain securityFilterChain(final HttpSecurity httpSecurity) throws Exception {
+    httpSecurity.csrf(AbstractHttpConfigurer::disable)
       .sessionManagement(it -> it.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(it -> it.requestMatchers("/actuator/**").permitAll()
         .requestMatchers("/**/swagger-ui/**").permitAll()
         .requestMatchers("/**/swagger-resources/**").permitAll()
         .requestMatchers("/**/v2/api-docs").permitAll()
-        .requestMatchers("/auth/**").permitAll()
+        .requestMatchers("/auth/register").permitAll()
+        .requestMatchers("/auth/token").permitAll()
         .anyRequest().authenticated()
-      )
-      .authenticationProvider(this.authenticationProvider())
-      .addFilterBefore(this.authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class)
-      .build();
-  }
-
-  private AuthenticationTokenFilter authenticationTokenFilter() {
-    return new AuthenticationTokenFilter(this.userDetailsService, this.jwtService);
+      );
+    httpSecurity.addFilterBefore(this.authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+    httpSecurity.authenticationProvider(this.authenticationProvider());
+    return httpSecurity.build();
   }
 
 }

@@ -24,4 +24,11 @@ public class ApiDataResponse<T> {
       .build();
   }
 
+  public static <T> ApiDataResponse<T> of(final T data) {
+    return ApiDataResponse.<T>builder()
+      .message("Success")
+      .data(data)
+      .build();
+  }
+
 }
