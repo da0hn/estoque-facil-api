@@ -9,12 +9,12 @@ spring:
       enabled: true
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${ESTOQUE_FACIL_DB_HOST:localhost}:${ESTOQUE_FACIL_DB_PORT:5432}/estoque_facil_api_db
+    url: jdbc:postgresql://${ESTOQUE_FACIL_DB_HOST:localhost}:${ESTOQUE_FACIL_DB_PORT:15432}/estoque_facil_api_db
     username: ${ESTOQUE_FACIL_DB_USER:user}
     password: ${ESTOQUE_FACIL_DB_PASSWORD:123456}
   flyway:
     enabled: true
-    url: jdbc:postgresql://${ESTOQUE_FACIL_DB_HOST:localhost}:${ESTOQUE_FACIL_DB_PORT:5432}/estoque_facil_api_db
+    url: jdbc:postgresql://${ESTOQUE_FACIL_DB_HOST:localhost}:${ESTOQUE_FACIL_DB_PORT:15432}/estoque_facil_api_db
     user: ${ESTOQUE_FACIL_DB_USER:user}
     password: ${ESTOQUE_FACIL_DB_PASSWORD:123456}
   docker:
