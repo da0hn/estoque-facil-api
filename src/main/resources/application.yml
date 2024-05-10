@@ -26,3 +26,13 @@ spring:
     web:
       pageable:
         one-indexed-parameters: true
+
+security:
+  jwt:
+    # https://www.devglan.com/online-tools/hmac-sha256-online
+    # https://generate-random.org/encryption-key-generator
+    secret: ${JWT_SECRET:qo4MFYfQLbKWdGRLCbAHF0B/3AZttdLAc8UN/YJw5HU=}
+    expiration: ${JWT_EXPIRATION:3d}
+    refresh-expiration: ${JWT_REFRESH_EXPIRATION:7d}
+
+
