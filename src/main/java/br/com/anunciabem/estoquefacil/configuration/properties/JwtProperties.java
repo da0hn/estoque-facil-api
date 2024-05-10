@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.time.Duration;
 
-@ConfigurationProperties(prefix = "jwt")
+@ConfigurationProperties(prefix = "security.jwt")
 public record JwtProperties(
   String secret,
   Duration expiration,
