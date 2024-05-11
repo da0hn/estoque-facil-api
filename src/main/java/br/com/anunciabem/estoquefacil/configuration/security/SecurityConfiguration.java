@@ -27,7 +27,13 @@ public class SecurityConfiguration {
 
   private final AuthenticationTokenFilter authenticationTokenFilter;
 
-  private final UnauthorizedHandler unauthorizedHandler;
+  private final String[] whitelist = {
+    "/actuator/**",
+    "/**/swagger-ui/**",
+    "/**/swagger-resources/**",
+    "/**/v2/api-docs",
+    "/auth/token"
+  };
 
   @Bean
   public DaoAuthenticationProvider authenticationProvider() {
@@ -51,11 +57,8 @@ public class SecurityConfiguration {
   public SecurityFilterChain securityFilterChain(final HttpSecurity httpSecurity) throws Exception {
     httpSecurity.csrf(AbstractHttpConfigurer::disable)
       .sessionManagement(it -> it.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-      .authorizeHttpRequests(it -> it.requestMatchers("/actuator/**").permitAll()
-        .requestMatchers("/**/swagger-ui/**").permitAll()
-        .requestMatchers("/**/swagger-resources/**").permitAll()
-        .requestMatchers("/**/v2/api-docs").permitAll()
-        .requestMatchers("/auth/token").permitAll()
+      .authorizeHttpRequests(it -> it.requestMatchers(this.whitelist).permitAll()
+        .requestMatchers("/users/**").hasAnyAuthority("ROLE_ADMIN")
         .anyRequest().authenticated()
       );
     httpSecurity.addFilterBefore(this.authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
