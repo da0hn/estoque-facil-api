@@ -29,9 +29,9 @@ public class SecurityConfiguration {
 
   private final String[] whitelist = {
     "/actuator/**",
-    "/**/swagger-ui/**",
+    "/**/swagger-ui*/**",
     "/**/swagger-resources/**",
-    "/**/v2/api-docs",
+    "/**/v3/api-docs/**",
     "/auth/token"
   };
 
