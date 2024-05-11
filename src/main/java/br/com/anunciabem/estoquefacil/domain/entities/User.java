@@ -1,5 +1,6 @@
 package br.com.anunciabem.estoquefacil.domain.entities;
 
+import br.com.anunciabem.estoquefacil.domain.constraints.ValidationUtils;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -17,12 +18,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -34,7 +35,6 @@ import java.util.stream.Stream;
 
 @Builder
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "User")
@@ -128,6 +128,27 @@ public class User implements Serializable, UserDetails {
   @Override
   public boolean isEnabled() {
     return true;
+  }
+
+  public void changePassword(
+    final String newPassword,
+    final PasswordEncoder passwordEncoder
+  ) {
+    ValidationUtils.requireNonNull(newPassword, "Password cannot be null");
+    if (passwordEncoder.matches(newPassword, this.password)) {
+      throw new IllegalArgumentException("New password must be different from the old password");
+    }
+    this.password = passwordEncoder.encode(newPassword);
+    this.updatedAt = Instant.now();
+  }
+
+  public void changeRole(final Role role) {
+    ValidationUtils.requireNonNull(role, "Role cannot be null");
+    if (this.role == role) {
+      throw new IllegalArgumentException("New role must be different from the old role");
+    }
+    this.role = role;
+    this.updatedAt = Instant.now();
   }
 
 }
