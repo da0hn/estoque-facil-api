@@ -2,11 +2,8 @@ package br.com.anunciabem.estoquefacil.configuration.security;
 
 import br.com.anunciabem.estoquefacil.configuration.properties.JwtProperties;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
@@ -34,26 +31,11 @@ public class JwtServiceImpl implements JwtService {
   @Override
   public boolean validateToken(final String token, final UserDetails userDetails) {
     final String username = this.extractUsername(token);
-    try {
-      Jwts.parserBuilder()
-        .setSigningKey(this.getSignKey())
-        .build()
-        .parse(token);
-      return (username.equals(userDetails.getUsername()) && !this.isTokenExpired(token));
-    }
-    catch (final MalformedJwtException e) {
-      log.error("Invalid JWT token: {}", e.getMessage());
-    }
-    catch (final ExpiredJwtException e) {
-      log.error("JWT token is expired: {}", e.getMessage());
-    }
-    catch (final UnsupportedJwtException e) {
-      log.error("JWT token is unsupported: {}", e.getMessage());
-    }
-    catch (final IllegalArgumentException e) {
-      log.error("JWT claims string is empty: {}", e.getMessage());
-    }
-    return false;
+    Jwts.parserBuilder()
+      .setSigningKey(this.getSignKey())
+      .build()
+      .parse(token);
+    return (username.equals(userDetails.getUsername()) && !this.isTokenExpired(token));
   }
 
   @Override

@@ -19,10 +19,6 @@ import java.io.IOException;
 @AllArgsConstructor
 public class AuthenticationTokenFilter extends OncePerRequestFilter {
 
-  private static final String BEARER = "Bearer ";
-
-  private static final String AUTHORIZATION_HEADER = "Authorization";
-
   private final UserDetailsService userDetailsService;
 
   private final JwtService jwtService;
@@ -36,12 +32,12 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
     final FilterChain filterChain
   ) throws ServletException, IOException {
     try {
-      final var authenticationHeader = request.getHeader(AUTHORIZATION_HEADER);
-      if (authenticationHeader == null || !authenticationHeader.startsWith(BEARER)) {
+      final var authenticationHeader = request.getHeader(JwtConstants.AUTHORIZATION_HEADER);
+      if (authenticationHeader == null || !authenticationHeader.startsWith(JwtConstants.BEARER)) {
         filterChain.doFilter(request, response);
         return;
       }
-      final var jwt = authenticationHeader.substring(BEARER.length());
+      final var jwt = authenticationHeader.substring(JwtConstants.BEARER.length());
       final var username = this.jwtService.extractUsername(jwt);
       final var userDetails = this.userDetailsService.loadUserByUsername(username);
       if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -54,7 +50,10 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
       filterChain.doFilter(request, response);
     }
     catch (final Exception e) {
-      this.logger.error("Cannot set user authentication: {}", e);
+      this.logger.error("Cannot set user authentication: ", e);
+      if (this.logger.isDebugEnabled()) {
+        e.printStackTrace();
+      }
       this.handlerExceptionResolver.resolveException(request, response, null, e);
     }
 
