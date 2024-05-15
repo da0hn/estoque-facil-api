@@ -9,12 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
@@ -55,7 +57,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     final var fieldErrors = ex.getBindingResult().getFieldErrors();
 
     final var response = fieldErrors.stream()
-      .map(error -> new ApiValidationFailureResponse(error.getField(), error.getRejectedValue().toString(), error.getDefaultMessage()))
+      .map(error -> new ApiValidationFailureResponse(error.getField(), ObjectUtils.nullSafeToString(error.getRejectedValue()), error.getDefaultMessage()))
       .collect(Collectors.toSet());
 
     return ResponseEntity.badRequest().body(ApiFailureResponse.of("Validation failed", HttpStatus.BAD_REQUEST, response));
