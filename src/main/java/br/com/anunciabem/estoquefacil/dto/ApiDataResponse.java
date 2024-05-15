@@ -39,4 +39,12 @@ public class ApiDataResponse<T> {
       .build();
   }
 
+  public static ApiDataResponse<Void> empty() {
+    return ApiDataResponse.<Void>builder()
+      .data(null)
+      .timestamp(Instant.now())
+      .message("Success")
+      .build();
+  }
+
 }

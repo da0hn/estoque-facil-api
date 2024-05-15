@@ -23,7 +23,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
   @ExceptionHandler({ IllegalArgumentException.class, IllegalStateException.class })
   public ResponseEntity<ApiDataResponse<?>> handleConflict(final RuntimeException exception) {
     exception.printStackTrace();
-    return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(ApiDataResponse.failure(exception.getMessage()));
+    return ResponseEntity.status(HttpStatus.CONFLICT).body(ApiDataResponse.failure(exception.getMessage()));
   }
 
   @ExceptionHandler({ RuntimeException.class, Exception.class })
