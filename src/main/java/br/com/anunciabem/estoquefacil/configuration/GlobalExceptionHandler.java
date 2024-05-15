@@ -1,6 +1,6 @@
 package br.com.anunciabem.estoquefacil.configuration;
 
-import br.com.anunciabem.estoquefacil.dto.ApiDataResponse;
+import br.com.anunciabem.estoquefacil.dto.ApiFailureResponse;
 import br.com.anunciabem.estoquefacil.dto.ApiValidationFailureResponse;
 import br.com.anunciabem.estoquefacil.exceptions.BusinessException;
 import br.com.anunciabem.estoquefacil.exceptions.ResourceNotFoundException;
@@ -21,26 +21,28 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler({ IllegalArgumentException.class, IllegalStateException.class })
-  public ResponseEntity<ApiDataResponse<?>> handleConflict(final RuntimeException exception) {
+  public ResponseEntity<ApiFailureResponse<?>> handleConflict(final RuntimeException exception) {
     exception.printStackTrace();
-    return ResponseEntity.status(HttpStatus.CONFLICT).body(ApiDataResponse.failure(exception.getMessage()));
+    return ResponseEntity.status(HttpStatus.CONFLICT)
+      .body(ApiFailureResponse.of(exception.getMessage(), HttpStatus.CONFLICT));
   }
 
   @ExceptionHandler({ RuntimeException.class, Exception.class })
-  public ResponseEntity<ApiDataResponse<?>> handleUnexpectedException(final RuntimeException exception) {
+  public ResponseEntity<ApiFailureResponse<?>> handleUnexpectedException(final RuntimeException exception) {
     exception.printStackTrace();
-    return ResponseEntity.internalServerError().body(ApiDataResponse.failure(exception.getMessage()));
+    return ResponseEntity.internalServerError()
+      .body(ApiFailureResponse.of(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR));
   }
 
   @ExceptionHandler(BusinessException.class)
-  public ResponseEntity<ApiDataResponse<?>> handleBusinessException(final BusinessException exception) {
+  public ResponseEntity<ApiFailureResponse<?>> handleBusinessException(final BusinessException exception) {
     exception.printStackTrace();
-    return ResponseEntity.badRequest().body(ApiDataResponse.failure(exception.getMessage()));
+    return ResponseEntity.badRequest().body(ApiFailureResponse.of(exception.getMessage(), HttpStatus.BAD_REQUEST));
   }
 
   @ExceptionHandler(ResourceNotFoundException.class)
-  public ResponseEntity<ApiDataResponse<?>> handleResourceNotFoundException(final ResourceNotFoundException exception) {
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiDataResponse.failure(exception.getMessage()));
+  public ResponseEntity<ApiFailureResponse<?>> handleResourceNotFoundException(final ResourceNotFoundException exception) {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiFailureResponse.of(exception.getMessage(), HttpStatus.NOT_FOUND));
   }
 
   @Override
@@ -53,10 +55,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     final var fieldErrors = ex.getBindingResult().getFieldErrors();
 
     final var response = fieldErrors.stream()
-      .map(error -> new ApiValidationFailureResponse(error.getField(), error.getDefaultMessage(), error.getRejectedValue().toString()))
+      .map(error -> new ApiValidationFailureResponse(error.getField(), error.getRejectedValue().toString(), error.getDefaultMessage()))
       .collect(Collectors.toSet());
 
-    return ResponseEntity.badRequest().body(ApiDataResponse.of(response));
+    return ResponseEntity.badRequest().body(ApiFailureResponse.of("Validation failed", HttpStatus.BAD_REQUEST, response));
   }
 
   @Override
@@ -66,7 +68,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     final HttpStatusCode status,
     final WebRequest request
   ) {
-    return ResponseEntity.badRequest().body(ApiDataResponse.failure(ex.getMessage()));
+    return ResponseEntity.unprocessableEntity().body(ApiFailureResponse.of(ex.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY));
   }
 
 }
