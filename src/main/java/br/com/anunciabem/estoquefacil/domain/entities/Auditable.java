@@ -31,12 +31,12 @@ public abstract class Auditable  {
 
   @NotNull
   @LastModifiedDate
-  @Column(name = "updated_at", updatable = false)
+  @Column(name = "updated_at")
   private Instant updatedAt;
 
   @NotNull
   @CreatedBy
-  @Column(name = "created_by", nullable = false)
+  @Column(name = "created_by", updatable = false, nullable = false)
   private String createdBy;
 
   @LastModifiedBy
