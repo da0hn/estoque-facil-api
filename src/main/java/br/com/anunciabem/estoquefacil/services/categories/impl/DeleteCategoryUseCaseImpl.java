@@ -22,6 +22,7 @@ public class DeleteCategoryUseCaseImpl implements DeleteCategoryUseCase {
     final var category = this.categoryRepository.findByIdOrElseThrow(categoryId);
 
     this.categoryRepository.delete(category);
+    log.info("Category successfully deleted categoryId={}", category.getId());
   }
 
 }
