@@ -1,7 +1,7 @@
 package br.com.anunciabem.estoquefacil.domain.entities;
 
 import br.com.anunciabem.estoquefacil.domain.constraints.ValidationUtils;
-import br.com.anunciabem.estoquefacil.exceptions.BusinessValidationException;
+import br.com.anunciabem.estoquefacil.domain.exceptions.BusinessValidationException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

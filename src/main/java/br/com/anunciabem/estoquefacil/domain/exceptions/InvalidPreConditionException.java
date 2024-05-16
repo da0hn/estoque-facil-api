@@ -1,4 +1,4 @@
-package br.com.anunciabem.estoquefacil.exceptions;
+package br.com.anunciabem.estoquefacil.domain.exceptions;
 
 import java.io.Serial;
 

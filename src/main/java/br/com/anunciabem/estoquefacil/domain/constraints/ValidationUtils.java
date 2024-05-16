@@ -1,6 +1,6 @@
 package br.com.anunciabem.estoquefacil.domain.constraints;
 
-import br.com.anunciabem.estoquefacil.exceptions.InvalidPreConditionException;
+import br.com.anunciabem.estoquefacil.domain.exceptions.InvalidPreConditionException;
 
 import java.util.Collection;
 import java.util.function.Predicate;

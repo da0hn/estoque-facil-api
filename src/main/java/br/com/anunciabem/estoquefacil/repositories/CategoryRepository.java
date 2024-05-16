@@ -1,7 +1,7 @@
 package br.com.anunciabem.estoquefacil.repositories;
 
 import br.com.anunciabem.estoquefacil.domain.entities.Category;
-import br.com.anunciabem.estoquefacil.exceptions.ResourceNotFoundException;
+import br.com.anunciabem.estoquefacil.domain.exceptions.ResourceNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

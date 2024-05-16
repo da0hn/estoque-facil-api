@@ -2,8 +2,8 @@ package br.com.anunciabem.estoquefacil.configuration;
 
 import br.com.anunciabem.estoquefacil.dto.ApiFailureResponse;
 import br.com.anunciabem.estoquefacil.dto.ApiValidationFailureResponse;
-import br.com.anunciabem.estoquefacil.exceptions.BusinessException;
-import br.com.anunciabem.estoquefacil.exceptions.ResourceNotFoundException;
+import br.com.anunciabem.estoquefacil.domain.exceptions.BusinessException;
+import br.com.anunciabem.estoquefacil.domain.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
