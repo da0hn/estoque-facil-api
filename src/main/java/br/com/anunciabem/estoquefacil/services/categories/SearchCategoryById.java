@@ -1,4 +1,4 @@
-package br.com.anunciabem.estoquefacil.services;
+package br.com.anunciabem.estoquefacil.services.categories;
 
 import br.com.anunciabem.estoquefacil.dto.CategorySummaryResponse;
 import org.springframework.transaction.annotation.Transactional;

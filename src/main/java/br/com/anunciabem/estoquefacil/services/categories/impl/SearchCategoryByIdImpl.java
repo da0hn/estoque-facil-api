@@ -1,8 +1,9 @@
-package br.com.anunciabem.estoquefacil.services;
+package br.com.anunciabem.estoquefacil.services.categories.impl;
 
 import br.com.anunciabem.estoquefacil.annotations.UseCase;
 import br.com.anunciabem.estoquefacil.dto.CategorySummaryResponse;
 import br.com.anunciabem.estoquefacil.repositories.CategoryRepository;
+import br.com.anunciabem.estoquefacil.services.categories.SearchCategoryById;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

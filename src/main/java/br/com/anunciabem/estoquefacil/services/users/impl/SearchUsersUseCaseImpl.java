@@ -1,9 +1,10 @@
-package br.com.anunciabem.estoquefacil.services;
+package br.com.anunciabem.estoquefacil.services.users.impl;
 
 import br.com.anunciabem.estoquefacil.annotations.UseCase;
 import br.com.anunciabem.estoquefacil.dto.SearchUserCriteria;
 import br.com.anunciabem.estoquefacil.dto.UserSummaryResponse;
 import br.com.anunciabem.estoquefacil.repositories.UserRepository;
+import br.com.anunciabem.estoquefacil.services.users.SearchUsersUseCase;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

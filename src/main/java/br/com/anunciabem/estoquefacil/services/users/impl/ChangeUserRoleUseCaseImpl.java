@@ -1,8 +1,9 @@
-package br.com.anunciabem.estoquefacil.services;
+package br.com.anunciabem.estoquefacil.services.users.impl;
 
 import br.com.anunciabem.estoquefacil.annotations.UseCase;
 import br.com.anunciabem.estoquefacil.dto.ChangeUserRoleParameter;
 import br.com.anunciabem.estoquefacil.repositories.UserRepository;
+import br.com.anunciabem.estoquefacil.services.users.ChangeUserRoleUseCase;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,9 +1,10 @@
-package br.com.anunciabem.estoquefacil.services;
+package br.com.anunciabem.estoquefacil.services.categories.impl;
 
 import br.com.anunciabem.estoquefacil.annotations.UseCase;
 import br.com.anunciabem.estoquefacil.dto.CategorySummaryResponse;
 import br.com.anunciabem.estoquefacil.dto.SearchCategoryCriteria;
 import br.com.anunciabem.estoquefacil.repositories.CategoryRepository;
+import br.com.anunciabem.estoquefacil.services.categories.SearchCategoriesUseCase;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

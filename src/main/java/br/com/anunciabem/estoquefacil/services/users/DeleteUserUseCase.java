@@ -1,9 +1,9 @@
-package br.com.anunciabem.estoquefacil.services;
+package br.com.anunciabem.estoquefacil.services.users;
 
 import org.springframework.transaction.annotation.Transactional;
 
-@FunctionalInterface
-public interface DeleteCategoryUseCase {
+
+public interface DeleteUserUseCase {
 
   @Transactional
   void execute(final Long userId);

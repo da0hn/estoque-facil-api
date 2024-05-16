@@ -1,10 +1,11 @@
-package br.com.anunciabem.estoquefacil.services;
+package br.com.anunciabem.estoquefacil.services.users.impl;
 
 import br.com.anunciabem.estoquefacil.annotations.UseCase;
 import br.com.anunciabem.estoquefacil.domain.entities.User;
 import br.com.anunciabem.estoquefacil.dto.RegisterUserParameter;
 import br.com.anunciabem.estoquefacil.dto.ResourceCreated;
 import br.com.anunciabem.estoquefacil.repositories.UserRepository;
+import br.com.anunciabem.estoquefacil.services.users.RegisterUserUseCase;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,8 +1,9 @@
-package br.com.anunciabem.estoquefacil.services;
+package br.com.anunciabem.estoquefacil.services.users.impl;
 
 import br.com.anunciabem.estoquefacil.annotations.UseCase;
 import br.com.anunciabem.estoquefacil.dto.ChangeUserPasswordParameter;
 import br.com.anunciabem.estoquefacil.repositories.UserRepository;
+import br.com.anunciabem.estoquefacil.services.users.ChangeUserPasswordUseCase;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

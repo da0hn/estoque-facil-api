@@ -1,4 +1,4 @@
-package br.com.anunciabem.estoquefacil.services;
+package br.com.anunciabem.estoquefacil.services.users;
 
 import br.com.anunciabem.estoquefacil.dto.RegisterUserParameter;
 import br.com.anunciabem.estoquefacil.dto.ResourceCreated;
