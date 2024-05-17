@@ -29,9 +29,9 @@ public class AuthenticateUseCaseImpl implements AuthenticateUseCase {
   public LoginResponse execute(@Valid final LoginParameter parameter) {
     log.debug("m=authenticate(parameter={})", parameter);
 
-    final var user = this.userRepository.findByUsernameOrElseThrow(parameter.username());
-
     this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(parameter.username(), parameter.password()));
+
+    final var user = this.userRepository.findByUsernameOrElseThrow(parameter.username());
 
     return LoginResponse.builder()
       .token(this.jwtService.generateToken(user, JwtService.TokenType.ACCESS))

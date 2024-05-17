@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -50,8 +51,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
   }
 
   @ExceptionHandler({ SignatureException.class, ExpiredJwtException.class, MalformedJwtException.class })
-  public ResponseEntity<ApiFailureResponse<Void>> handleSignatureException(final RuntimeException exception) {
+  public ResponseEntity<ApiFailureResponse<Void>> handleJwtExceptions(final RuntimeException exception) {
     return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ApiFailureResponse.of(exception.getMessage(), HttpStatus.FORBIDDEN));
+  }
+
+  @ExceptionHandler({ BadCredentialsException.class })
+  public ResponseEntity<ApiFailureResponse<Void>> handleBadCredentialsException(final BadCredentialsException exception) {
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ApiFailureResponse.of(exception.getMessage(), HttpStatus.FORBIDDEN));
   }
 
   @Override
