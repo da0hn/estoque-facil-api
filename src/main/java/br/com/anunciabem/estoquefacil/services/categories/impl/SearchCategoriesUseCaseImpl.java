@@ -21,16 +21,7 @@ public class SearchCategoriesUseCaseImpl implements SearchCategoriesUseCase {
   public Page<CategorySummaryResponse> execute(final SearchCategoryCriteria criteria, final Pageable pageable) {
     log.debug("m=execute(criteria={}, pageable={})", criteria, pageable);
     return this.categoryRepository.findAll(criteria.id(), criteria.name(), criteria.description(), criteria.searchText(), pageable)
-      .map(category -> CategorySummaryResponse.builder()
-        .id(category.getId())
-        .name(category.getName())
-        .description(category.getDescription())
-        .createdAt(category.getCreatedAt())
-        .updatedAt(category.getUpdatedAt())
-        .createdBy(category.getCreatedBy())
-        .modifiedBy(category.getModifiedBy())
-        .build()
-      );
+      .map(CategorySummaryResponse::of);
   }
 
 }

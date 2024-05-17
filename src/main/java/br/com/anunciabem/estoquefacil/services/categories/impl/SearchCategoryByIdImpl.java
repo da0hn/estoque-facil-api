@@ -22,15 +22,7 @@ public class SearchCategoryByIdImpl implements SearchCategoryById {
   public CategorySummaryResponse execute(@Valid @NotNull final Long categoryId) {
     log.debug("m=execute(categoryId={})", categoryId);
     final var category = this.categoryRepository.findByIdOrElseThrow(categoryId);
-    return CategorySummaryResponse.builder()
-      .id(category.getId())
-      .name(category.getName())
-      .description(category.getDescription())
-      .createdAt(category.getCreatedAt())
-      .updatedAt(category.getUpdatedAt())
-      .createdBy(category.getCreatedBy())
-      .modifiedBy(category.getModifiedBy())
-      .build();
+    return CategorySummaryResponse.of(category);
   }
 
 }
