@@ -18,6 +18,7 @@ import br.com.anunciabem.estoquefacil.services.users.SearchUserById;
 import br.com.anunciabem.estoquefacil.services.users.SearchUsersUseCase;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -53,7 +54,7 @@ public class UserController {
     @RequestParam(name = "username", required = false, defaultValue = "") final String username,
     @RequestParam(name = "email", required = false, defaultValue = "") final String email,
     @RequestParam(name = "search-text", required = false, defaultValue = "") final String searchText,
-    final Pageable pageable
+    @ParameterObject final Pageable pageable
   ) {
     final var output = this.searchUsersUseCase.execute(
       SearchUserCriteria.builder()

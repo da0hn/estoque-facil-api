@@ -15,6 +15,7 @@ import br.com.anunciabem.estoquefacil.services.brands.SearchBrandByIdUseCase;
 import br.com.anunciabem.estoquefacil.services.brands.SearchBrandsUseCase;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -64,7 +65,7 @@ public class BrandController {
     @RequestParam(name = "category-id", required = false) final Long categoryId,
     @RequestParam(name = "category-name", required = false) final String categoryName,
     @RequestParam(name = "search-text", required = false) final String searchText,
-    final Pageable pageable
+    @ParameterObject final Pageable pageable
   ) {
     final var output = this.searchBrandsUseCase.execute(
       SearchBrandCriteria.builder()

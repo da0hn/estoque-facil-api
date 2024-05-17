@@ -15,6 +15,7 @@ import br.com.anunciabem.estoquefacil.services.categories.SearchCategoriesUseCas
 import br.com.anunciabem.estoquefacil.services.categories.SearchCategoryById;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -69,7 +70,7 @@ public class CategoryController {
     @RequestParam(name = "description", required = false) final String description,
     @RequestParam(name = "name", required = false) final String name,
     @RequestParam(name = "search-text", required = false) final String searchText,
-    final Pageable pageable
+    @ParameterObject final Pageable pageable
   ) {
     final var output = this.searchCategoriesUseCase.execute(
       SearchCategoryCriteria.builder()
