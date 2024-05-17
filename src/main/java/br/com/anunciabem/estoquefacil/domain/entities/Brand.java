@@ -1,6 +1,7 @@
 package br.com.anunciabem.estoquefacil.domain.entities;
 
 import br.com.anunciabem.estoquefacil.domain.constraints.ValidationUtils;
+import br.com.anunciabem.estoquefacil.domain.exceptions.BusinessValidationException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,12 +17,15 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.util.StringUtils;
 
 import java.io.Serial;
 import java.io.Serializable;
 
 @Getter
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "Brand")
 @Table(name = "brand")
@@ -53,6 +57,20 @@ public class Brand extends Auditable implements Serializable {
     this.category = category;
     if (this.category.getBrands().contains(this)) return;
     this.category.addBrand(this);
+  }
+
+  public void changeName(final String name) {
+    if (!StringUtils.hasText(name)) {
+      throw new BusinessValidationException("Brand name cannot be null or empty");
+    }
+    this.name = name;
+  }
+
+  public void changeDescription(final String description) {
+    if (description != null && description.isBlank()) {
+      throw new BusinessValidationException("Brand description cannot be empty");
+    }
+    this.description = description;
   }
 
 }

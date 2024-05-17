@@ -1,6 +1,7 @@
 package br.com.anunciabem.estoquefacil.services.categories.impl;
 
 import br.com.anunciabem.estoquefacil.annotations.UseCase;
+import br.com.anunciabem.estoquefacil.domain.exceptions.BusinessValidationException;
 import br.com.anunciabem.estoquefacil.dto.ChangeCategoryParameter;
 import br.com.anunciabem.estoquefacil.repositories.CategoryRepository;
 import br.com.anunciabem.estoquefacil.services.categories.ChangeCategoryUseCase;
@@ -20,6 +21,10 @@ public class ChangeCategoryUseCaseImpl implements ChangeCategoryUseCase {
 
     final var category = this.categoryRepository.findByName(parameter.name())
       .orElseGet(() -> this.categoryRepository.findByIdOrElseThrow(parameter.categoryId()));
+
+    if (!category.getId().equals(parameter.categoryId())) {
+      throw new BusinessValidationException(String.format("Category with name %s already exists", parameter.name()));
+    }
 
     category.changeName(parameter.name());
     category.changeDescription(parameter.description());
