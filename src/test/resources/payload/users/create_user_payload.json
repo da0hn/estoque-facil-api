@@ -4,5 +4,5 @@
   "username": "john.doe",
   "password": "123456",
   "confirmationPassword": "123456",
-  "role": "ADMIN"
+  "role": "SELLER"
 }

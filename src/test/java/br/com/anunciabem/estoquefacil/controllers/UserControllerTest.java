@@ -1,7 +1,10 @@
 package br.com.anunciabem.estoquefacil.controllers;
 
 import br.com.anunciabem.estoquefacil.IntegrationTest;
+import br.com.anunciabem.estoquefacil.dto.ApiDataResponse;
+import br.com.anunciabem.estoquefacil.dto.LoginResponse;
 import io.restassured.RestAssured;
+import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,11 +40,18 @@ public class UserControllerTest extends IntegrationTest {
     // https://mkyong.com/spring-boot/spring-boot-testcontainers-example/
     // https://medium.com/@hsielei/end-to-end-testing-spring-boot-rest-apis-with-rest-assured-e21765f74263
     // https://medium.com/@mbanaee61/api-testing-in-spring-boot-2a6d69e5c3ce
-    final var payload = readPayloadRequest("payload/users/create_user_payload.json");
+    final var loginResponse = RestAssured.given()
+      .contentType(ContentType.JSON)
+      .body(readPayloadRequest("payload/users/authenticate_admin_payload.json"))
+      .when()
+      .post("/auth/token")
+      .thenReturn()
+      .as(new TypeRef<ApiDataResponse<LoginResponse>>() { });
+
     RestAssured.given()
       .contentType(ContentType.JSON)
-      .header("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6WyJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluaXN0cmF0b3IiLCJpYXQiOjE3MTYwNTc3MTYsImlzcyI6ImVzdG9xdWUtZmFjaWwiLCJleHAiOjE4MTYzMTY5MTZ9.RyvRn0JYO4w8MajsdzuYo53qXNFr0PjcwweNlTbJ3Nw")
-      .body(payload)
+      .header("Authorization", "Bearer " + loginResponse.getData().token())
+      .body(readPayloadRequest("payload/users/create_user_payload.json"))
       .when()
       .post("/users")
       .then()
