@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -19,29 +18,25 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.util.StringUtils;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Brand")
-@Table(name = "brand")
-public class Brand extends Auditable implements Serializable {
+@Entity(name = "Model")
+@Table(name = "model")
+public class Model extends Auditable implements Serializable {
 
   @Serial
   private static final long serialVersionUID = -7498710341003257572L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_brands")
-  @SequenceGenerator(name = "seq_brands", sequenceName = "seq_brands", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_models")
+  @SequenceGenerator(name = "seq_models", sequenceName = "seq_models", allocationSize = 1)
   @Column(name = "id", nullable = false)
   private Long id;
 
@@ -54,19 +49,14 @@ public class Brand extends Auditable implements Serializable {
 
   @NotNull
   @ManyToOne(fetch = FetchType.EAGER, optional = false)
-  @JoinColumn(name = "category_id", nullable = false)
-  private Category category;
+  @JoinColumn(name = "brand_id", nullable = false)
+  private Brand brand;
 
-  @Builder.Default
-  @Fetch(FetchMode.SUBSELECT)
-  @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "brand")
-  private Set<Model> models = new HashSet<>(0);
-
-  public void addCategory(final Category category) {
-    ValidationUtils.requireNonNull(category, "Category cannot be null");
-    this.category = category;
-    if (this.category.getBrands().contains(this)) return;
-    this.category.addBrand(this);
+  public void addBrand(final Brand brand) {
+    ValidationUtils.requireNonNull(brand, "Brand cannot be null");
+    this.brand = brand;
+    if (this.brand.getModels().contains(this)) return;
+    this.brand.addModel(this);
   }
 
   public void changeName(final String name) {
@@ -81,16 +71,6 @@ public class Brand extends Auditable implements Serializable {
       throw new BusinessValidationException("Brand description cannot be empty");
     }
     this.description = description;
-  }
-
-  public void addModel(final Model model) {
-    ValidationUtils.requireNonNull(model, "Brand cannot be null");
-    if (this.models == null) {
-      this.models = new HashSet<>(0);
-    }
-    this.models.add(model);
-    if (model.getBrand() != this) return;
-    model.addBrand(this);
   }
 
 }

@@ -20,17 +20,19 @@ public interface BrandRepository extends JpaRepository<Brand, Long> {
       .orElseThrow(() -> new ResourceNotFoundException("Brand not found"));
   }
 
-  @Query("""
-         SELECT b
-         FROM Brand b
-         WHERE
-           (:brandId IS NULL OR b.id = :brandId)
-           AND (:name IS NULL OR b.name = :name)
-           AND (:description IS NULL OR b.description = :description)
-           AND (:categoryId IS NULL OR b.category.id = :categoryId)
-           AND (:categoryName IS NULL OR b.category.name = :categoryName)
-           AND (:searchText IS NULL OR b.name LIKE %:searchText% OR b.description LIKE %:searchText% OR b.category.name LIKE %:searchText%)
-         """)
+  @Query(
+    """
+    SELECT b
+    FROM Brand b
+    WHERE
+      (:brandId IS NULL OR b.id = :brandId)
+      AND (:name IS NULL OR b.name = :name)
+      AND (:description IS NULL OR b.description = :description)
+      AND (:categoryId IS NULL OR b.category.id = :categoryId)
+      AND (:categoryName IS NULL OR b.category.name = :categoryName)
+      AND (:searchText IS NULL OR b.name LIKE %:searchText% OR b.description LIKE %:searchText% OR b.category.name LIKE %:searchText%)
+    """
+  )
   Page<Brand> findAll(
     Long brandId,
     String name,
