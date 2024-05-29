@@ -21,11 +21,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.proxy.HibernateProxy;
 import org.springframework.util.StringUtils;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -84,13 +86,32 @@ public class Brand extends Auditable implements Serializable {
   }
 
   public void addModel(final Model model) {
-    ValidationUtils.requireNonNull(model, "Brand cannot be null");
+    ValidationUtils.requireNonNull(model, "Model cannot be null");
     if (this.models == null) {
       this.models = new HashSet<>(0);
     }
     this.models.add(model);
     if (model.getBrand() != this) return;
     model.addBrand(this);
+  }
+
+  @Override
+  public final int hashCode() {
+    return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() :
+      this.getClass().hashCode();
+  }
+
+  @Override
+  public final boolean equals(final Object o) {
+    if (this == o) return true;
+    if (o == null) return false;
+    final Class<?> oEffectiveClass = o instanceof HibernateProxy ?
+      ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+    final Class<?> thisEffectiveClass = this instanceof HibernateProxy ?
+      ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+    if (thisEffectiveClass != oEffectiveClass) return false;
+    final Brand brand = (Brand) o;
+    return id != null && Objects.equals(id, brand.id);
   }
 
 }
