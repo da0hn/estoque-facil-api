@@ -1,6 +1,7 @@
 package br.com.anunciabem.estoquefacil.domain.entities;
 
 import br.com.anunciabem.estoquefacil.domain.constraints.ValidationUtils;
+import br.com.anunciabem.estoquefacil.domain.exceptions.BusinessValidationException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.proxy.HibernateProxy;
@@ -19,8 +21,10 @@ import org.hibernate.proxy.HibernateProxy;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
+@Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -49,7 +53,7 @@ public class Product extends Auditable implements Serializable {
   @Column(name = "sale_price", nullable = false, precision = 10, scale = 2)
   private BigDecimal salePrice;
 
-  @Column(name = "imei", nullable = false)
+  @Column(name = "imei", nullable = true)
   private String imei;
 
   @Column(name = "quantity", nullable = false)
@@ -59,11 +63,53 @@ public class Product extends Auditable implements Serializable {
   @JoinColumn(name = "model_id", nullable = false)
   private Model model;
 
-  public void addBrand(final Model model) {
+  public void addModel(final Model model) {
     ValidationUtils.requireNonNull(model, "Model cannot be null");
     this.model = model;
     if (this.model.getProducts().contains(this)) return;
     this.model.addProduct(this);
+  }
+
+  public void changeName(final String newName) {
+    if (newName != null && newName.isBlank()) {
+      throw new BusinessValidationException("Brand name cannot be empty");
+    }
+    this.name = newName;
+  }
+
+  public void changeDescription(final String newDescription) {
+    if (newDescription != null && newDescription.isBlank()) {
+      throw new BusinessValidationException("Brand description cannot be empty");
+    }
+    this.name = newDescription;
+  }
+
+  public void changeCostPrice(final BigDecimal newCostPrice) {
+    if (newCostPrice == null) {
+      throw new BusinessValidationException("Cost price cannot be null");
+    }
+    this.costPrice = newCostPrice.setScale(2, RoundingMode.HALF_EVEN);
+  }
+
+  public void changeSalePrice(final BigDecimal newSalePrice) {
+    if (newSalePrice == null) {
+      throw new BusinessValidationException("Sale price cannot be null");
+    }
+    this.salePrice = newSalePrice.setScale(2, RoundingMode.HALF_EVEN);
+  }
+
+  public void changeQuantity(final Long newQuantity) {
+    if (newQuantity == null) {
+      throw new BusinessValidationException("Quantity cannot be null");
+    }
+    this.quantity = newQuantity;
+  }
+
+  public void changeImei(final String newImei) {
+    if (newImei != null && newImei.isBlank()) {
+      throw new BusinessValidationException("IMEI cannot be null or empty");
+    }
+    this.imei = newImei;
   }
 
   @Override

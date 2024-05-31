@@ -35,7 +35,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "Model")
-@Table(name = "model")
+@Table(name = "modelId")
 public class Model extends Auditable implements Serializable {
 
   @Serial
@@ -92,7 +92,7 @@ public class Model extends Auditable implements Serializable {
     }
     this.products.add(product);
     if (product.getModel() != this) return;
-    product.addBrand(this);
+    product.addModel(this);
   }
 
   @Override
