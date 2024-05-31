@@ -1,8 +1,8 @@
 package br.com.anunciabem.estoquefacil.services.models.impl;
 
 import br.com.anunciabem.estoquefacil.annotations.UseCase;
-import br.com.anunciabem.estoquefacil.dto.ModelSummaryResponse;
-import br.com.anunciabem.estoquefacil.dto.SearchModelCriteria;
+import br.com.anunciabem.estoquefacil.dto.model.ModelSummaryResponse;
+import br.com.anunciabem.estoquefacil.dto.model.SearchModelCriteria;
 import br.com.anunciabem.estoquefacil.repositories.ModelRepository;
 import br.com.anunciabem.estoquefacil.services.models.SearchModelsUseCase;
 import lombok.AllArgsConstructor;

@@ -2,12 +2,12 @@ package br.com.anunciabem.estoquefacil.controllers;
 
 import br.com.anunciabem.estoquefacil.dto.ApiDataResponse;
 import br.com.anunciabem.estoquefacil.dto.ApiPageResponse;
-import br.com.anunciabem.estoquefacil.dto.ChangeModelParameter;
-import br.com.anunciabem.estoquefacil.dto.ChangeModelRequest;
-import br.com.anunciabem.estoquefacil.dto.CreateModelParameter;
-import br.com.anunciabem.estoquefacil.dto.ModelSummaryResponse;
+import br.com.anunciabem.estoquefacil.dto.model.ChangeModelParameter;
+import br.com.anunciabem.estoquefacil.dto.model.ChangeModelRequest;
+import br.com.anunciabem.estoquefacil.dto.model.CreateModelParameter;
+import br.com.anunciabem.estoquefacil.dto.model.ModelSummaryResponse;
 import br.com.anunciabem.estoquefacil.dto.ResourceCreated;
-import br.com.anunciabem.estoquefacil.dto.SearchModelCriteria;
+import br.com.anunciabem.estoquefacil.dto.model.SearchModelCriteria;
 import br.com.anunciabem.estoquefacil.services.models.ChangeModelUseCase;
 import br.com.anunciabem.estoquefacil.services.models.CreateModelUseCase;
 import br.com.anunciabem.estoquefacil.services.models.DeleteModelUseCase;

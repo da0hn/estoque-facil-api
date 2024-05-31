@@ -1,8 +1,8 @@
 package br.com.anunciabem.estoquefacil.services.users.impl;
 
 import br.com.anunciabem.estoquefacil.annotations.UseCase;
-import br.com.anunciabem.estoquefacil.dto.SearchUserCriteria;
-import br.com.anunciabem.estoquefacil.dto.UserSummaryResponse;
+import br.com.anunciabem.estoquefacil.dto.user.SearchUserCriteria;
+import br.com.anunciabem.estoquefacil.dto.user.UserSummaryResponse;
 import br.com.anunciabem.estoquefacil.repositories.UserRepository;
 import br.com.anunciabem.estoquefacil.services.users.SearchUsersUseCase;
 import lombok.AllArgsConstructor;

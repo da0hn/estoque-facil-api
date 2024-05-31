@@ -1,6 +1,6 @@
 package br.com.anunciabem.estoquefacil.services.categories;
 
-import br.com.anunciabem.estoquefacil.dto.ChangeCategoryParameter;
+import br.com.anunciabem.estoquefacil.dto.category.ChangeCategoryParameter;
 import jakarta.validation.Valid;
 import org.springframework.transaction.annotation.Transactional;
 

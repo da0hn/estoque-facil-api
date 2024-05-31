@@ -1,8 +1,8 @@
 package br.com.anunciabem.estoquefacil.services.categories.impl;
 
 import br.com.anunciabem.estoquefacil.annotations.UseCase;
-import br.com.anunciabem.estoquefacil.dto.CategorySummaryResponse;
-import br.com.anunciabem.estoquefacil.dto.SearchCategoryCriteria;
+import br.com.anunciabem.estoquefacil.dto.category.CategorySummaryResponse;
+import br.com.anunciabem.estoquefacil.dto.category.SearchCategoryCriteria;
 import br.com.anunciabem.estoquefacil.repositories.CategoryRepository;
 import br.com.anunciabem.estoquefacil.services.categories.SearchCategoriesUseCase;
 import lombok.AllArgsConstructor;

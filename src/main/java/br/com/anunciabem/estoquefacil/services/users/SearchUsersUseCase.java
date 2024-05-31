@@ -1,7 +1,7 @@
 package br.com.anunciabem.estoquefacil.services.users;
 
-import br.com.anunciabem.estoquefacil.dto.SearchUserCriteria;
-import br.com.anunciabem.estoquefacil.dto.UserSummaryResponse;
+import br.com.anunciabem.estoquefacil.dto.user.SearchUserCriteria;
+import br.com.anunciabem.estoquefacil.dto.user.UserSummaryResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;

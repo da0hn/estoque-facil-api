@@ -1,6 +1,6 @@
 package br.com.anunciabem.estoquefacil.services.categories;
 
-import br.com.anunciabem.estoquefacil.dto.CategorySummaryResponse;
+import br.com.anunciabem.estoquefacil.dto.category.CategorySummaryResponse;
 import org.springframework.transaction.annotation.Transactional;
 
 @FunctionalInterface

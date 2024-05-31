@@ -1,4 +1,4 @@
-package br.com.anunciabem.estoquefacil.dto;
+package br.com.anunciabem.estoquefacil.dto.brand;
 
 import br.com.anunciabem.estoquefacil.domain.constraints.NullableValue;
 import br.com.anunciabem.estoquefacil.domain.constraints.UniqueBrandName;
@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-public record CreateModelParameter(
+public record CreateBrandParameter(
   @NotBlank
   @UniqueBrandName
   String name,
@@ -14,6 +14,6 @@ public record CreateModelParameter(
   String description,
   @NotNull
   @Positive
-  Long brandId
+  Long categoryId
 ) {
 }

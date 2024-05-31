@@ -1,6 +1,7 @@
-package br.com.anunciabem.estoquefacil.dto;
+package br.com.anunciabem.estoquefacil.dto.model;
 
 import br.com.anunciabem.estoquefacil.domain.entities.Model;
+import br.com.anunciabem.estoquefacil.dto.ResourceSummary;
 import lombok.Builder;
 import org.springframework.format.annotation.DateTimeFormat;
 

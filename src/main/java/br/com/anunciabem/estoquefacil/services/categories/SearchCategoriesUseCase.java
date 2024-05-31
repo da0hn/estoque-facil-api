@@ -1,7 +1,7 @@
 package br.com.anunciabem.estoquefacil.services.categories;
 
-import br.com.anunciabem.estoquefacil.dto.CategorySummaryResponse;
-import br.com.anunciabem.estoquefacil.dto.SearchCategoryCriteria;
+import br.com.anunciabem.estoquefacil.dto.category.CategorySummaryResponse;
+import br.com.anunciabem.estoquefacil.dto.category.SearchCategoryCriteria;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;

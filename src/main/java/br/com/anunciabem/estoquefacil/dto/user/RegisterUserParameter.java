@@ -1,4 +1,4 @@
-package br.com.anunciabem.estoquefacil.dto;
+package br.com.anunciabem.estoquefacil.dto.user;
 
 import br.com.anunciabem.estoquefacil.domain.constraints.UniqueEmail;
 import br.com.anunciabem.estoquefacil.domain.constraints.UniqueUsername;

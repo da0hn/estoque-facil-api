@@ -1,7 +1,6 @@
 package br.com.anunciabem.estoquefacil.services.brands;
 
-import br.com.anunciabem.estoquefacil.dto.ChangeBrandParameter;
-import br.com.anunciabem.estoquefacil.dto.ResourceCreated;
+import br.com.anunciabem.estoquefacil.dto.brand.ChangeBrandParameter;
 import jakarta.validation.Valid;
 import org.springframework.transaction.annotation.Transactional;
 

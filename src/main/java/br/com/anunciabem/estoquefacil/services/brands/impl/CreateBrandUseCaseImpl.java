@@ -2,7 +2,7 @@ package br.com.anunciabem.estoquefacil.services.brands.impl;
 
 import br.com.anunciabem.estoquefacil.annotations.UseCase;
 import br.com.anunciabem.estoquefacil.domain.entities.Brand;
-import br.com.anunciabem.estoquefacil.dto.CreateBrandParameter;
+import br.com.anunciabem.estoquefacil.dto.brand.CreateBrandParameter;
 import br.com.anunciabem.estoquefacil.dto.ResourceCreated;
 import br.com.anunciabem.estoquefacil.repositories.BrandRepository;
 import br.com.anunciabem.estoquefacil.repositories.CategoryRepository;

@@ -1,6 +1,6 @@
 package br.com.anunciabem.estoquefacil.services.users;
 
-import br.com.anunciabem.estoquefacil.dto.ChangeUserRoleParameter;
+import br.com.anunciabem.estoquefacil.dto.user.ChangeUserRoleParameter;
 import jakarta.validation.Valid;
 import org.springframework.transaction.annotation.Transactional;
 

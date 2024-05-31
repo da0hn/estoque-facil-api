@@ -2,12 +2,12 @@ package br.com.anunciabem.estoquefacil.controllers;
 
 import br.com.anunciabem.estoquefacil.dto.ApiDataResponse;
 import br.com.anunciabem.estoquefacil.dto.ApiPageResponse;
-import br.com.anunciabem.estoquefacil.dto.BrandSummaryResponse;
-import br.com.anunciabem.estoquefacil.dto.ChangeBrandParameter;
-import br.com.anunciabem.estoquefacil.dto.ChangeBrandRequest;
-import br.com.anunciabem.estoquefacil.dto.CreateBrandParameter;
+import br.com.anunciabem.estoquefacil.dto.brand.BrandSummaryResponse;
+import br.com.anunciabem.estoquefacil.dto.brand.ChangeBrandParameter;
+import br.com.anunciabem.estoquefacil.dto.brand.ChangeBrandRequest;
+import br.com.anunciabem.estoquefacil.dto.brand.CreateBrandParameter;
 import br.com.anunciabem.estoquefacil.dto.ResourceCreated;
-import br.com.anunciabem.estoquefacil.dto.SearchBrandCriteria;
+import br.com.anunciabem.estoquefacil.dto.brand.SearchBrandCriteria;
 import br.com.anunciabem.estoquefacil.services.brands.ChangeBrandUseCase;
 import br.com.anunciabem.estoquefacil.services.brands.CreateBrandUseCase;
 import br.com.anunciabem.estoquefacil.services.brands.DeleteBrandUseCase;

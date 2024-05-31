@@ -1,4 +1,4 @@
-package br.com.anunciabem.estoquefacil.dto;
+package br.com.anunciabem.estoquefacil.dto.category;
 
 import br.com.anunciabem.estoquefacil.domain.constraints.UniqueCategoryName;
 import jakarta.validation.constraints.NotBlank;

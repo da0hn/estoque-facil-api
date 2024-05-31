@@ -2,12 +2,12 @@ package br.com.anunciabem.estoquefacil.controllers;
 
 import br.com.anunciabem.estoquefacil.dto.ApiDataResponse;
 import br.com.anunciabem.estoquefacil.dto.ApiPageResponse;
-import br.com.anunciabem.estoquefacil.dto.CategorySummaryResponse;
-import br.com.anunciabem.estoquefacil.dto.ChangeCategoryParameter;
-import br.com.anunciabem.estoquefacil.dto.ChangeCategoryRequest;
-import br.com.anunciabem.estoquefacil.dto.CreateCategoryParameter;
+import br.com.anunciabem.estoquefacil.dto.category.CategorySummaryResponse;
+import br.com.anunciabem.estoquefacil.dto.category.ChangeCategoryParameter;
+import br.com.anunciabem.estoquefacil.dto.category.ChangeCategoryRequest;
+import br.com.anunciabem.estoquefacil.dto.category.CreateCategoryParameter;
 import br.com.anunciabem.estoquefacil.dto.ResourceCreated;
-import br.com.anunciabem.estoquefacil.dto.SearchCategoryCriteria;
+import br.com.anunciabem.estoquefacil.dto.category.SearchCategoryCriteria;
 import br.com.anunciabem.estoquefacil.services.categories.ChangeCategoryUseCase;
 import br.com.anunciabem.estoquefacil.services.categories.CreateCategoryUseCase;
 import br.com.anunciabem.estoquefacil.services.categories.DeleteCategoryUseCase;

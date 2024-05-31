@@ -1,4 +1,4 @@
-package br.com.anunciabem.estoquefacil.dto;
+package br.com.anunciabem.estoquefacil.dto.model;
 
 import br.com.anunciabem.estoquefacil.domain.constraints.NullableValue;
 import br.com.anunciabem.estoquefacil.domain.constraints.UniqueModelName;

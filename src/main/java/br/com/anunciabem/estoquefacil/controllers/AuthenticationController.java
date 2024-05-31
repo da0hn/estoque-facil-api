@@ -1,8 +1,8 @@
 package br.com.anunciabem.estoquefacil.controllers;
 
 import br.com.anunciabem.estoquefacil.dto.ApiDataResponse;
-import br.com.anunciabem.estoquefacil.dto.LoginParameter;
-import br.com.anunciabem.estoquefacil.dto.LoginResponse;
+import br.com.anunciabem.estoquefacil.dto.user.LoginParameter;
+import br.com.anunciabem.estoquefacil.dto.user.LoginResponse;
 import br.com.anunciabem.estoquefacil.services.users.AuthenticateUseCase;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

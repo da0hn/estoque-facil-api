@@ -1,8 +1,8 @@
 package br.com.anunciabem.estoquefacil.services.brands.impl;
 
 import br.com.anunciabem.estoquefacil.annotations.UseCase;
-import br.com.anunciabem.estoquefacil.dto.BrandSummaryResponse;
-import br.com.anunciabem.estoquefacil.dto.SearchBrandCriteria;
+import br.com.anunciabem.estoquefacil.dto.brand.BrandSummaryResponse;
+import br.com.anunciabem.estoquefacil.dto.brand.SearchBrandCriteria;
 import br.com.anunciabem.estoquefacil.repositories.BrandRepository;
 import br.com.anunciabem.estoquefacil.services.brands.SearchBrandsUseCase;
 import lombok.AllArgsConstructor;

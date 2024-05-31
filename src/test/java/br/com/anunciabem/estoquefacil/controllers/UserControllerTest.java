@@ -2,7 +2,7 @@ package br.com.anunciabem.estoquefacil.controllers;
 
 import br.com.anunciabem.estoquefacil.IntegrationTest;
 import br.com.anunciabem.estoquefacil.dto.ApiDataResponse;
-import br.com.anunciabem.estoquefacil.dto.LoginResponse;
+import br.com.anunciabem.estoquefacil.dto.user.LoginResponse;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;

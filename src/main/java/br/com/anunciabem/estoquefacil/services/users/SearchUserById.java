@@ -1,6 +1,6 @@
 package br.com.anunciabem.estoquefacil.services.users;
 
-import br.com.anunciabem.estoquefacil.dto.UserSummaryResponse;
+import br.com.anunciabem.estoquefacil.dto.user.UserSummaryResponse;
 import org.springframework.transaction.annotation.Transactional;
 
 @FunctionalInterface

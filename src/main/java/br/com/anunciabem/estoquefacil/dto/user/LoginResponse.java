@@ -1,4 +1,4 @@
-package br.com.anunciabem.estoquefacil.dto;
+package br.com.anunciabem.estoquefacil.dto.user;
 
 import br.com.anunciabem.estoquefacil.domain.entities.Role;
 import lombok.Builder;

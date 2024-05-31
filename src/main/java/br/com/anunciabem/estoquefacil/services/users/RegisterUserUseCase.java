@@ -1,6 +1,6 @@
 package br.com.anunciabem.estoquefacil.services.users;
 
-import br.com.anunciabem.estoquefacil.dto.RegisterUserParameter;
+import br.com.anunciabem.estoquefacil.dto.user.RegisterUserParameter;
 import br.com.anunciabem.estoquefacil.dto.ResourceCreated;
 import jakarta.validation.Valid;
 import org.springframework.transaction.annotation.Transactional;

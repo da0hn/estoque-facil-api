@@ -1,4 +1,4 @@
-package br.com.anunciabem.estoquefacil.dto;
+package br.com.anunciabem.estoquefacil.dto.category;
 
 import jakarta.validation.constraints.NotBlank;
 
