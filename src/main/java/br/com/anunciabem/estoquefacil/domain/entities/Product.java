@@ -29,7 +29,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "Product")
-@Table(name = "products")
+@Table(name = "product")
 public class Product extends Auditable implements Serializable {
 
   @Serial

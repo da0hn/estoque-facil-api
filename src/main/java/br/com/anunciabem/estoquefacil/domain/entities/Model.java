@@ -35,7 +35,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "Model")
-@Table(name = "modelId")
+@Table(name = "Model")
 public class Model extends Auditable implements Serializable {
 
   @Serial
